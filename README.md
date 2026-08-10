@@ -1,6 +1,7 @@
 # 🤖 Bot de Automatización Personal
 
 Bot en Python que cada mañana:
+
 1. **Organiza tu correo** — clasifica y mueve correos entrantes a carpetas según reglas (remitente/asunto).
 2. **Descarga archivos** — guarda automáticamente los adjuntos de correos que cumplan tus filtros.
 3. **Te avisa de noticias/ofertas** — lee feeds RSS y te manda un resumen por correo cada mañana.
@@ -10,17 +11,17 @@ Bot en Python que cada mañana:
 python3 -m venv venv
 source venv/bin/activate   # En Windows: venv\Scripts\activate
 pip install -r requirements.txt
-```
+``
 
 ## ⚙️ Configuración
 
 1. Copia el archivo de ejemplo:
-   ```bash
+   ``bash
    cp config.example.yaml config.yaml
-   ```
+   ``
 2. Edita `config.yaml` con tus datos:
    - Tu dirección de correo y **contraseña de aplicación** (no la contraseña normal).
-     - Para Gmail: actívala en https://myaccount.google.com/apppasswords (requiere verificación en 2 pasos activada).
+     - Para Gmail: actívala en <https://myaccount.google.com/apppasswords> (requiere verificación en 2 pasos activada).
    - Las reglas de organización de correo (por remitente o asunto).
    - Los filtros de descarga de adjuntos.
    - Los feeds RSS que quieres seguir para el resumen matutino.
@@ -31,25 +32,25 @@ pip install -r requirements.txt
 ## ▶️ Uso
 
 **Ejecutar una sola vez** (para probar que todo funciona):
-```bash
+``bash
 python main.py --once
-```
+``
 
 **Dejarlo corriendo en segundo plano** (se ejecuta automáticamente cada día a la hora configurada):
-```bash
+``bash
 python main.py
-```
+``
 
 Para que siga corriendo aunque cierres la terminal, en Linux/Mac puedes usar:
-```bash
+``bash
 nohup python main.py > bot.log 2>&1 &
-```
+``
 
 O configurarlo como tarea programada (cron / Task Scheduler) que llame a `python main.py --once` cada mañana, en lugar de dejar el script corriendo indefinidamente.
 
 ## 🗂️ Estructura del proyecto
 
-```
+``
 email_bot/
 ├── config.example.yaml   # Plantilla de configuración
 ├── config.yaml            # Tu configuración real (no subir a git)
@@ -62,7 +63,7 @@ email_bot/
     ├── file_downloader.py   # Descarga adjuntos filtrados
     ├── news_digest.py       # Genera el resumen HTML de RSS
     └── notifier.py          # Envía el resumen por correo
-```
+``
 
 ## 🔧 Personalización rápida
 
@@ -81,4 +82,4 @@ email_bot/
 
 - Usa siempre una **contraseña de aplicación**, nunca tu contraseña real de correo.
 - Si usas Outlook/Hotmail, cambia `imap_server` a `outlook.office365.com` y revisa si necesitas habilitar IMAP en la configuración de tu cuenta.
-- El bot borra el correo original de la bandeja de entrada al moverlo (usa `copy` + marca `\Deleted` + `expunge`). Si prefieres que **copie sin borrar**, elimina la línea `conn.store(msg_id, "+FLAGS", "\\Deleted")` en `src/email_organizer.py`.
+- El bot borra el correo original de la bandeja de entrada al moverlo (usa `copy` + marca `\Deleted` + `expunge`). Si prefieres que **copie sin borrar**, elimina la línea `conn.store(msg_id, "+FLAGS", "\\Deleted")` en `src/email_organizer.py``
